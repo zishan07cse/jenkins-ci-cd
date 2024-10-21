@@ -13,11 +13,11 @@ RUN npm install
 # Copy the rest of the React app files to the working directory
 COPY . .
 
-# Build the React app
-RUN npm run build
-
 # Stage 2: Serve with Apache
 FROM httpd:2.4
+
+# Set the ServerName directive globally to suppress the warning
+RUN echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf
 
 # Copy the build files to Apache's public directory
 COPY --from=build /app/build/ /usr/local/apache2/htdocs/
