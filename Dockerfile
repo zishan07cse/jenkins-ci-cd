@@ -13,6 +13,9 @@ RUN npm install
 # Copy the rest of the React app files to the working directory
 COPY . .
 
+# **Build the React app**
+RUN npm run build
+
 # Stage 2: Serve with Apache
 FROM httpd:2.4
 
